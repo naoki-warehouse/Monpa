@@ -16,8 +16,8 @@ if __name__ == "__main__" :
     window_func = np.hamming(N) #窓関数で検索！
     data = x[start:start+N]
 
-    #1000Hz以下4000Hz以上の必要ない部分をカット
-    #2000Hzと3500Hz成分抽出用のindexを取得
+    #1000Hz以下300Hz以上の必要ない部分をカット
+    #2000Hzと2500Hz成分抽出用のindexを取得
     index_max=0
     index_min=0
     delta_f = 100
@@ -35,13 +35,13 @@ if __name__ == "__main__" :
             low_bit_lower_index = index - index_min
         if item >= 2000-delta_f and item <= 2000+delta_f:
             low_bit_upper_index = index - index_min
-        if item > 2000+delta_f and item < 3500-delta_f:
+        if item > 2000+delta_f and item < 2500-delta_f:
             high_bit_lower_index = index - index_min
-        if item >= 3500-delta_f and item <= 3500+delta_f:
+        if item >= 2500-delta_f and item <= 2500+delta_f:
             high_bit_upper_index = index - index_min
-        if item > 3500+delta_f and item <= 4000:
+        if item > 2500+delta_f and item <= 3000:
             index_max = index
-        if item > 4000:
+        if item > 3000:
             break;
     char_data="0b"
     string_buffer = ""
@@ -53,12 +53,12 @@ if __name__ == "__main__" :
             X = np.fft.fft(data*window_func)  # FFT
             spectrum = [np.sqrt(c.real ** 2 + c.imag ** 2) for c in X[index_min:index_max]]  # 振幅スペクトル
             # 振幅スペクトルを描画
-#            axis([1000, 4000, 0, 50])
-#            xlabel("frequency [Hz]")
-#            ylabel("amplitude spectrum")
-#            freqList = np.fft.fftfreq(N, d=1.0/fs)[index_min:index_max]  # 周波数軸の値を計算
-#            plot(freqList, spectrum,linestyle='-')
-#            pause(.01)
+            axis([1000, 4000, 0, 50])
+            xlabel("frequency [Hz]")
+            ylabel("amplitude spectrum")
+            freqList = np.fft.fftfreq(N, d=1.0/fs)[index_min:index_max]  # 周波数軸の値を計算
+            plot(freqList, spectrum,linestyle='-')
+            pause(.01)
             low_sum = sum(spectrum[low_bit_lower_index:low_bit_upper_index])
             high_sum = sum(spectrum[high_bit_lower_index:high_bit_upper_index])
             print("LowBit:"+str(low_sum))

@@ -9,7 +9,7 @@ class encoder:
         self.fs=44100 #サンプリング周波数
         self.clock=100 #基準クロック
         self.swav=[]
-        self.high_frequency = 3500 #1のとき
+        self.high_frequency = 2500 #1のとき
         self.low_frequency = 2000 #0のとき
 
     def encode(self,char):
