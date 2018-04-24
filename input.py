@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from sin_wave import encoder
+from dsp import encoder
 from matplotlib import pylab as plt
 import struct
 import wave
