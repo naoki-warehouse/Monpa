@@ -16,5 +16,3 @@ for char in str:
 enc.blank()
 print(len(enc.get()))
 swav = enc.save()
-#plt.plot(swave[0:5000])
-#plt.show()
